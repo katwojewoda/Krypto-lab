@@ -26,7 +26,8 @@ def clean_text(plaintext, keep_spaces=False):
     clears whitespace from file content
     or keeps whitespace in file content.
     Parameters:
-         plaintext (string) - file content        
+        plaintext (string) - file content 
+	    keep_spaces (bool) - if whitespace are kept     
     Returns:
         prodessed plaintext (string)
     Raises:
@@ -60,11 +61,12 @@ def clean_num(plaintext):
 def clean_acc(plaintext, lower=True):
     """
     Depending on user decision of keeping uppercase letters:
-    clears uppercase letters from file content  
+    changes uppercase letters to lowercase letters in file content  
     or keeps uppercase letters in file content.
     Clears diacritics from file content    
     Parameters:
-         plaintext (string) - file content        
+         plaintext (string) - file content 
+	     lower (bool) - if uppercase letters are kept      
     Returns:
          prodessed plaintext (string)
     Raises:
