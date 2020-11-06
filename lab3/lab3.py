@@ -1,17 +1,23 @@
-from random import randint
 import sys
 
-class User(object):
+class UserA(object):
     def __init__(self, p, g, a = None):
         self.p = p
         self.g = g
-        if a is None:
-            a = randint(2, p - 1)
+        a = int(secret_a)
         self.a = a
         self.g_to_a = None
         self.g_to_b = None
         self.g_to_ab = None
-        
+class UserB(object):
+    def __init__(self, p, g, b = None):
+        self.p = p
+        self.g = g
+        b = int(secret_b)
+        self.b = b
+        self.g_to_a = None
+        self.g_to_b = None
+        self.g_to_ab = None        
 def open_file_pg(filename):
     if type(filename) != str:
         raise TypeError
@@ -50,7 +56,7 @@ def pdh(alice, bob):
 
     # obliczanie
     alice.g_to_a = potega_m(alice.g, alice.a, alice.p)
-    bob.g_to_a = potega_m(bob.g, bob.a, bob.p)
+    bob.g_to_a = potega_m(bob.g, bob.b, bob.p)
 
     # wysłanie
     alice.g_to_b = bob.g_to_a
@@ -61,7 +67,7 @@ def pdh(alice, bob):
 
     # obliczanie
     alice.g_to_ab = potega_m(alice.g_to_b, alice.a, alice.p)
-    bob.g_to_ab = potega_m(bob.g_to_b, bob.a, alice.p)
+    bob.g_to_ab = potega_m(bob.g_to_b, bob.b, alice.p)
 
     return public_data
 
@@ -82,14 +88,6 @@ def apdh(public_data):
             b = k
 
     return potega_m(g, a*b, p)
-
-p = 7
-g = 5
-
-alice = User(p, g)
-bob = User(p, g)
-
-dh = pdh(alice, bob)
 
 input_file_a = None
 input_file_b = None
@@ -141,6 +139,14 @@ while not input_file_loaded_pg:
         input_file_pg = input()
         if 'exit' == input_file_pg.lower():
             sys.exit()          
+
+p = int(key_pg[0])
+g = int(key_pg[1])
+
+alice = UserA(p, g)
+bob = UserB(p, g)
+
+dh = pdh(alice, bob)
             
 print(f'Klucz Alicji: {alice.g_to_ab}')
 print(f'Klucz Boba: {bob.g_to_ab}')
