@@ -12,7 +12,7 @@ class User(object):
         self.g_to_b = None
         self.g_to_ab = None
         
-def open_file(filename):
+def open_file_pg(filename):
     if type(filename) != int:
         raise TypeError
 
@@ -21,7 +21,7 @@ def open_file(filename):
         key = [[int(x) for x in line.split()] for line in f] 
     return key
 
-def open_file_pg(filename):
+def open_file(filename):
     if type(filename) != int:
         raise TypeError
 
@@ -91,41 +91,27 @@ bob = User(p, g)
 
 dh = pdh(alice, bob)
 
-input_file = None
+input_file_a = None
+input_file_b = None
+input_file_pg = None
+input_file_loaded_a = False
 
-input_file_loaded = False
 
-
-while not input_file_loaded:
+while not input_file_loaded_a:
     try:
-        print(f'Otwieranie pliku {input_file}... ', end='')
-        secret_a = open_file(input_file)
+        print(f'Otwieranie pliku {input_file_a}... ', end='')
+        secret_a = open_file(input_file_a)
         print('gotowe')
-        
-        print(f'Otwieranie pliku {input_file}... ', end='')
-        secret_b = open_file(input_file)
-        print('gotowe')
-        
-        print(f'Otwieranie pliku {input_file}... ', end='')
-        pg = open_file(input_file)
-        print('gotowe')
-        input_file_loaded = True
+        input_file_loaded_a = True
     except:
-        if input_file is not None and '.' not in input_file:
-            input_file += '.txt'
+        if input_file_a is not None and '.' not in input_file_a:
+            input_file_a += '.txt'
             continue
         print('Podaj nazwę pliku zawierającego tajną liczbę a (exit aby wyjść)')
         input_file_a = input()
         if 'exit' == input_file_a.lower():
             sys.exit()
-        print('Podaj nazwę pliku zawierającego tajną liczbę b (exit aby wyjść)')
-        input_file_b = input()
-        if 'exit' == input_file_b.lower():
-            sys.exit()
-        print('Podaj nazwę pliku zawierającego p oraz g (exit aby wyjść)')
-        input_file_pg = input()
-        if 'exit' == input_file_pg.lower():
-            sys.exit() 
+        
             
 print(f'Klucz Alicji: {alice.g_to_ab}')
 print(f'Klucz Boba: {bob.g_to_ab}')
