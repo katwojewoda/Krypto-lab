@@ -13,16 +13,16 @@ class User(object):
         self.g_to_ab = None
         
 def open_file_pg(filename):
-    if type(filename) != int:
+    if type(filename) != str:
         raise TypeError
 
     with open(filename, 'r') as f:
-        w, h = [int(x) for x in next(f).split()]
-        key = [[int(x) for x in line.split()] for line in f] 
-    return key
+        content = f.read().split(',')
+            
+    return content
 
 def open_file(filename):
-    if type(filename) != int:
+    if type(filename) != str:
         raise TypeError
 
     with open(filename, 'r') as f:
@@ -95,8 +95,8 @@ input_file_a = None
 input_file_b = None
 input_file_pg = None
 input_file_loaded_a = False
-
-
+input_file_loaded_b = False
+input_file_loaded_pg = False
 while not input_file_loaded_a:
     try:
         print(f'Otwieranie pliku {input_file_a}... ', end='')
@@ -111,7 +111,36 @@ while not input_file_loaded_a:
         input_file_a = input()
         if 'exit' == input_file_a.lower():
             sys.exit()
-        
+            
+while not input_file_loaded_b:
+    try:
+        print(f'Otwieranie pliku {input_file_b}... ', end='')
+        secret_b = open_file(input_file_b)
+        print('gotowe')
+        input_file_loaded_b = True
+    except:
+        if input_file_b is not None and '.' not in input_file_b:
+            input_file_b += '.txt'
+            continue
+        print('Podaj nazwę pliku zawierającego tajną liczbę b (exit aby wyjść)')
+        input_file_b = input()
+        if 'exit' == input_file_b.lower():
+            sys.exit()    
+            
+while not input_file_loaded_pg:
+    try:
+        print(f'Otwieranie pliku {input_file_pg}... ', end='')
+        key_pg = open_file_pg(input_file_pg)
+        print('gotowe')
+        input_file_loaded_pg = True
+    except:
+        if input_file_pg is not None and '.' not in input_file_pg:
+            input_file_pg += '.txt'
+            continue
+        print('Podaj nazwę pliku zawierającego p i g (exit aby wyjść)')
+        input_file_pg = input()
+        if 'exit' == input_file_pg.lower():
+            sys.exit()          
             
 print(f'Klucz Alicji: {alice.g_to_ab}')
 print(f'Klucz Boba: {bob.g_to_ab}')
