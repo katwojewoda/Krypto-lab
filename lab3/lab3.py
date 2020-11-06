@@ -17,6 +17,15 @@ def open_file(filename):
         raise TypeError
 
     with open(filename, 'r') as f:
+        w, h = [int(x) for x in next(f).split()]
+        key = [[int(x) for x in line.split()] for line in f] 
+    return key
+
+def open_file_pg(filename):
+    if type(filename) != int:
+        raise TypeError
+
+    with open(filename, 'r') as f:
         content = f.read()
      
     return content
@@ -82,53 +91,37 @@ bob = User(p, g)
 
 dh = pdh(alice, bob)
 
-input_file_a = None
-input_file_b = None
-input_file_pg = None 
-input_file_a_loaded = False
-input_file_b_loaded = False
-input_file_pg_loaded = False
+input_file = None
 
-while not input_file_a_loaded:
+input_file_loaded = False
+
+
+while not input_file_loaded:
     try:
-        print(f'Otwieranie pliku {input_file_a}... ', end='')
-        secret_a = open_file(input_file_a)
+        print(f'Otwieranie pliku {input_file}... ', end='')
+        secret_a = open_file(input_file)
         print('gotowe')
-        input_file_a_loaded = True
+        
+        print(f'Otwieranie pliku {input_file}... ', end='')
+        secret_b = open_file(input_file)
+        print('gotowe')
+        
+        print(f'Otwieranie pliku {input_file}... ', end='')
+        pg = open_file(input_file)
+        print('gotowe')
+        input_file_loaded = True
     except:
-        if input_file_a is not None and '.' not in input_file_a:
-            input_file_a += '.txt'
+        if input_file is not None and '.' not in input_file:
+            input_file += '.txt'
             continue
         print('Podaj nazwę pliku zawierającego tajną liczbę a (exit aby wyjść)')
         input_file_a = input()
         if 'exit' == input_file_a.lower():
             sys.exit()
-            
-while not input_file_b_loaded:
-    try:
-        print(f'Otwieranie pliku {input_file_b}... ', end='')
-        secret_b = open_file(input_file_b)
-        print('gotowe')
-        input_file_b_loaded = True
-    except:
-        if input_file_b is not None and '.' not in input_file_b:
-            input_file_b += '.txt'
-            continue
         print('Podaj nazwę pliku zawierającego tajną liczbę b (exit aby wyjść)')
         input_file_b = input()
         if 'exit' == input_file_b.lower():
             sys.exit()
-            
-while not input_file_pg_loaded:
-    try:
-        print(f'Otwieranie pliku {input_file_pg}... ', end='')
-        pg = open_file(input_file_pg)
-        print('gotowe')
-        input_file_pg_loaded = True
-    except:
-        if input_file_pg is not None and '.' not in input_file_pg:
-            input_file_pg += '.txt'
-            continue
         print('Podaj nazwę pliku zawierającego p oraz g (exit aby wyjść)')
         input_file_pg = input()
         if 'exit' == input_file_pg.lower():
