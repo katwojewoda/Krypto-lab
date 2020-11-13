@@ -1,0 +1,123 @@
+
+1.	Autorzy:
+  Katarzyna Wojewoda – manual, komentarze, wstępny kod odczytu pliku, testowanie
+  Maciej Torhan – kod programu, testowanie, korekty
+
+2.	Cele programu:
+• funkcja potega_m(a, b, p) wylicza w szybszy sposób potege a^b (mod p),
+• w przypadku błędów program ponownie zadaje pytanie użytkownikowi,
+• funkcja pdh realizuje protokół Diffiego-Hellmana dla 2 osób; a, b wczytywane z pliku,
+• otwiera plików z nazwami wskazanymi przez użytkownika,
+• wyświetla na ekranie informacji o aktualnie wykonanych operacjach 
+• funkcja apdh dokonuje ataku na protokół Diffiego-Hellmana dwoma metodami.
+
+3.	Użycie:
+   •	Do uruchomienia potrzebne są dodatkowe biblioteki:
+a.	Sys - System-specific parameters and functions
+                  	 (https://docs.python.org/3/library/sys.html)
+b.	random - Generate pseudo-random numbers
+                   	 (https://docs.python.org/3/library/random.html)
+c.	time - This module provides various time-related functions.
+ (https://docs.python.org/3/library/time.html)
+	
+4.	Instrukcja:
+
+4.1.	Po uruchomieniu programu użytkownik zostanie poproszony o podanie pliku zawierającego p i g  „Podaj plik zawierający parametry p i g (exit aby wyjść)”  
+i zatwierdzenie klawiszem Enter. 
+Pojawi się komunikat
+
+   „Otwieranie pliku [nazwa].txt... gotowe”
+
+a.	W przypadku błędu podania pliku pojawi się komunikat  
+ „Otwieranie pliku [nazwa]… Wystąpił błąd przy otwieraniu pliku 
+  Otwieranie pliku [nazwa].txt... Wystąpił błąd przy otwieraniu pliku” 
+ i ponownie zostanie uruchomiony punkt 1.
+
+b.	Nie ma konieczności podawania .txt w nazwie pliku. W tym wypadku pojawi się  komunikat
+   „Otwieranie pliku [nazwa]... Wystąpił błąd przy otwieraniu pliku
+  Otwieranie pliku [nazwa].txt... gotowe”
+
+c.	Wpisanie „exit” i naciśnięcie klawisza Enter powoduje wyjście z programu.
+
+4.2.	Następnie użytkownik zostanie poproszony o podanie pliku zawierającego p i g  „Podaj plik zawierający tajną liczbę Alicji (exit aby wyjść)”  i zatwierdzenie klawiszem Enter. 
+Pojawi się komunikat
+
+   „Otwieranie pliku [nazwa].txt... gotowe”
+
+a.	W przypadku błędu podania pliku pojawi się komunikat  
+
+ „Otwieranie pliku [nazwa]… Wystąpił błąd przy otwieraniu pliku 
+  Otwieranie pliku [nazwa].txt... Wystąpił błąd przy otwieraniu pliku” 
+
+ i ponownie zostanie uruchomiony punkt 3.
+
+b.	Nie ma konieczności podawania .txt w nazwie pliku. W tym wypadku pojawi się  komunikat
+
+   „Otwieranie pliku [nazwa]... Wystąpił błąd przy otwieraniu pliku
+  Otwieranie pliku [nazwa].txt... gotowe”
+
+c.	Wpisanie „exit” i naciśnięcie klawisza Enter powoduje wyjście z programu.
+
+
+4.3.	Następnie użytkownik zostanie poproszony o podanie pliku zawierającego p i g  „Podaj plik zawierający tajną liczbę Boba  (exit aby wyjść)”  i zatwierdzenie klawiszem Enter. 
+Pojawi się komunikat
+
+   „Otwieranie pliku [nazwa].txt... gotowe”
+
+a.	W przypadku błędu podania pliku pojawi się komunikat  
+
+ „Otwieranie pliku [nazwa]… Wystąpił błąd przy otwieraniu pliku 
+  Otwieranie pliku [nazwa].txt... Wystąpił błąd przy otwieraniu pliku” 
+
+ i ponownie zostanie uruchomiony punkt 2.
+
+b.	Nie ma konieczności podawania .txt w nazwie pliku. W tym wypadku pojawi się  komunikat
+
+   „Otwieranie pliku [nazwa]... Wystąpił błąd przy otwieraniu pliku
+  Otwieranie pliku [nazwa].txt... gotowe”
+
+c.	Wpisanie „exit” i naciśnięcie klawisza Enter powoduje wyjście z programu.
+
+4.4.	Następnie zostają sprawdzone podane parametry z plików i zostanie wyświetlony komunikat
+„sprawdzanie poprawności parametrów…”
+
+a.	Jeżeli wartości będą poprawne poprzedni komunikat będzie wyglądać w następujący sposób
+„sprawdzanie poprawności parametrów… ok”
+
+b.	Jeżeli któryś z podanych plików będzie zawierał błędne wartości zostanie wyświetlony odpowiedni komunikat: 
+„Różne liczby pierwsze Alicji i Boba”
+„Różne generatory Alicji i Boba”
+„Liczba g nie jest generatorem”
+I program zakończy działanie.
+
+4.5.	W następnym kroku program obliczy klucze i wyświetli komunikat 
+„Klucz Alicji: []
+Klucz Boba: []”
+Oraz dane publiczne
+„Publiczne dane:
+p  = []
+g = []
+g_to_a  = []
+g_to_b = []”
+
+4.6. Następnie program przejdzie do łamania klucza. 
+
+a.	Najpierw zastosowana będzie metoda ataku brutalnego. Wyświetli się komunikat
+„Łamanie klucza…”
+Oraz po pewnym czasie 
+„Klucz o wartości [] został złamany w czasie [] metodą bruteforce” 
+
+b.	Najpierw zastosowana będzie metoda Shanksa. Wyświetli się komunikat
+„Łamanie klucza…”
+Oraz po pewnym czasie 
+„Klucz o wartości [] został złamany w czasie [] metodą baby-step giant-step” 
+
+7.	Licencja:
+
+  GNU GPL
+
+8.	Ćwiczenie:
+ 
+Dodatkowo zostało wykonane ćwiczenie zalecone podczas laboratorium. Używając protokołu D-H uzgodnić tajny klucz. 
+Obrane zostało p=27 i g=11.  Następnie przekazano g^a = 7 i g^b = 17. Otrzymano g^ab=20. 
+   
